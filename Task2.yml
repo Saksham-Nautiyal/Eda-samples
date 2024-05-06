@@ -1,0 +1,17 @@
+- name: Fetch
+  hosts: idrac
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Get System Inventory
+      dellemc.openmanage.idrac_system_info:
+        idrac_ip: "{{ inventory_hostname }}"
+        idrac_user: "{{ idrac_user }}"
+        idrac_password: "{{ idrac_password }}"
+        validate_certs: false
+      register: response
+
+    - name: Display
+      debug:
+        var: response
