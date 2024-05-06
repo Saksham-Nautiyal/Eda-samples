@@ -27,22 +27,17 @@
 
   ## Define the action we should take should the condition be met
       action:     
-        run_playbook: 
-          name: Task1.yml
+        run_job_template: 
+          name: server_restart
 
     - name: Temperature
       condition: event.MessageId is search("AMP0300", ignorecase=true)
 
       action:
-        run_playbook: 
-          name: Task2.yml
+        run_job_template: 
+          name: gather_info
 
-    - name: Event3
-      condition:  event.MessageId is search("t", ignorecase=true)
 
-      action:
-        run_playbook: 
-          name: Task3.yml
 
 
 
