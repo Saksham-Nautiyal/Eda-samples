@@ -1,0 +1,45 @@
+- name: Connect and Fetch
+  hosts: all
+  connection: local
+  vars:
+    job_data: "{{response.json.Members}}"
+    job_durations: {}
+
+  tasks:
+    - name: Connect to iDRAC
+      ansible.builtin.uri:
+        url: "https://100.71.90.193/redfish/v1/Managers/iDRAC.Embedded.1/Oem/Dell/Jobs"
+        method: GET
+        user: "saksham"
+        password: "Dell_123$"
+        validate_certs: 0
+      register: response
+
+    - name: Extract job IDs
+      set_fact:
+        job_ids: "{{ job_ids | default([]) + [item['@odata.id'].split('/')[-1]] }}"
+      loop: "{{ job_data }}"
+
+
+    - name: Connect to all job id URIs
+      ansible.builtin.uri:
+        url: "https://100.71.90.193/redfish/v1/Managers/iDRAC.Embedded.1/Oem/Dell/Jobs/{{ item  }}"
+        method: GET
+        user: "saksham"
+        password: "Dell_123$"
+        validate_certs: 0
+      register: serv_response
+      loop: "{{ job_ids }}"
+
+    - name: Calculate job durations and build dictionary
+      set_fact:
+        job_durations: "{{ job_durations | default({}) | combine({item.json.Id: ((item.json.ActualRunningStopTime | to_datetime('%Y-%m-%dT%H:%M:%S')) - (item.json.ActualRunningStartTime | to_datetime('%Y-%m-%dT%H:%M:%S'))).total_seconds()}) }}"
+      loop: "{{ serv_response.results }}"
+
+    - name: Display job durations dictionary
+      debug:
+        var: job_durations
+
+
+
+

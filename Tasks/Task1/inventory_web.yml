@@ -1,0 +1,12 @@
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+web:
+  hosts:
+    localhost:
+      ansible_connection: local
+      ansible_port: 8000
+
+
+
