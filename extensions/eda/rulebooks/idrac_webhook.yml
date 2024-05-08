@@ -14,7 +14,7 @@
         keyfile: "server.key"
       
       filters:
-        - dellemc.openmanage.insert_hosts_to_meta:
+        - ansible.eda.insert_hosts_to_meta:
             host_path: "idrac_ip"      
 
 
