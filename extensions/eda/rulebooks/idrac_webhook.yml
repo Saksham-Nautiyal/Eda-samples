@@ -6,7 +6,7 @@
   
   ## Define our source for events
   sources:
-    - dellemc.openmanage.idrac_event_webhook:
+    - ansible.eda.webhook:
         host: "{{ listener_host }}"
         port: "{{ listener_port }}"
         verify_certs: true
