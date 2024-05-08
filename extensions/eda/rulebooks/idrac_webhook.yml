@@ -9,9 +9,9 @@
     - dellemc.openmanage.idrac_event_webhook:
         host: "{{ listener_host }}"
         port: "{{ listener_port }}"
-        verify_certs: true
-        certfile: "cert.pem"
-        keyfile: "server.key"
+        verify_certs: false
+        # certfile: "cert.pem"
+        # keyfile: "server.key"
       
       filters:
         - ansible.eda.insert_hosts_to_meta:
