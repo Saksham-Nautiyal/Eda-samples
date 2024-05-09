@@ -10,8 +10,8 @@
         host: "{{ listener_host }}"
         port: "{{ listener_port }}"
         verify_certs: true
-        certfile: /cert_files/cert.pem
-        keyfile: /cert_files/server.key
+        certfile: "/cert_files/cert.pem"
+        keyfile: "/cert_files/server.key"
       
       filters:
         - ansible.eda.insert_hosts_to_meta:
