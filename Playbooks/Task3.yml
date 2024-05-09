@@ -1,7 +1,7 @@
 ---
-- name: Site is down
+- name: Display
   hosts: all
   gather_facts: false
   tasks:
     - debug:
-        msg: "Hostname"
+        msg: "Recieved the event"
