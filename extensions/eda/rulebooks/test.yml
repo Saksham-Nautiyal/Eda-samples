@@ -1,0 +1,27 @@
+---
+- name: Listen for events on a webhook
+  hosts: all
+  ## Define our source for events
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 9090
+
+  ## Define the conditions we are looking for
+  rules:
+    - name: Job Id
+      condition: event.payload.message == "List of job IDs"
+
+  ## Define the action we should take should the condition be met
+      action:
+        run_playbook: 
+          name: rem1.yml
+
+    - name: Job duration
+      condition: event.payload.message == "Job duration"
+
+      action:
+        run_playbook: 
+          name: rem2.yml
+
+
