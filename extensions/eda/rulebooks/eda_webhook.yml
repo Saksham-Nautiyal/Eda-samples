@@ -1,6 +1,6 @@
 ---
 - name: Listen for events on a webhook
-  hosts: idrac
+  hosts: all
   gather_facts: false
   # execution_strategy: parallel
   
