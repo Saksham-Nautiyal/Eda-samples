@@ -9,5 +9,7 @@
     - name: Job Id
       condition: event.payload.message == "list of job"
       action:
-        debug:
-          msg: "You said, '{{ event.payload.message }}'. Is that what you meant to say?"
+        run_job_template:
+          name: Trigger from EDA
+          organization: Default
+
