@@ -6,7 +6,7 @@
   
   sources:
     - dellemc.openmanage.idrac_event_webhook:
-        host: 100.96.37.52
+        host: 0.0.0.0
         port: 5000
         verify_certs: true
         certfile: "/cert_files/cert.pem"
@@ -18,7 +18,7 @@
 
   rules:
     - name: Power on
-      condition: event.MessageId is search("SYS1001", ignorecase=true)
+      condition: event.MessageId is search("AMP0302", ignorecase=true)
       action:     
         run_job_template: 
           name: server_restart
