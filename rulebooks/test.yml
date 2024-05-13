@@ -10,6 +10,6 @@
       condition: event.payload.message == "list of job"
       action:
         run_job_template:
-          name: Trigger from EDA
+          name: gather_info
           organization: Default
 
