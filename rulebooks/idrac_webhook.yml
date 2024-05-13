@@ -21,11 +21,7 @@
   ## Define the conditions we are looking for
   rules:
     - name: Power on
-      condition: 
-        all: 
-          - event.MessageId is search("SYS1001", ignorecase=true)
-
-  ## Define the action we should take should the condition be met
+      condition: event.MessageId is search("SYS1001", ignorecase=true)
       action:     
         run_job_template: 
           name: server_restart
@@ -33,7 +29,6 @@
 
     - name: Temperature
       condition: event.MessageId is search("AMP0300", ignorecase=true)
-
       action:
         run_job_template: 
           name: gather_info
