@@ -2,37 +2,30 @@
 - name: Listen for events on a webhook
   hosts: all
   gather_facts: false
-  execution_strategy: parallel
-  
+
   sources:
     - dellemc.openmanage.idrac_event_webhook:
         host: 0.0.0.0
         port: 5000
         verify_certs: true
-        certfile: "/cert_files/cert.pem"
-        keyfile: "/cert_files/server.key"
-      
+        certfile: '/cert_files/cert.pem'
+        keyfile: '/cert_files/server.key'
+
       filters:
         - ansible.eda.insert_hosts_to_meta:
-            host_path: "idrac_ip"      
+            host_path: 'idrac_ip'
 
   rules:
-    - name: Power on
-      condition: event.MessageId is search("AMP0302", ignorecase=true)
-      action:     
-        run_job_template: 
-          name: server_restart
-          organization: Default
+    - name: Power on the Server
+      condition: event.MessageId is search("SYS1001", ignorecase=true)
+      action:
+        run_job_template:
+          name: "server_restart"
+          organization: "Default"
 
-    - name: Temperature
+    - name: Get the Temperature details
       condition: event.MessageId is search("AMP0300", ignorecase=true)
       action:
-        run_job_template: 
-          name: gather_info 
-          organization: Default
-
-
-
-
-
-#Run:  ansible-rulebook --rulebook webhook-example.yml -i inventory.yml --print-events
+        run_job_template:
+          name: "gather_info"
+          organization: "Default"
