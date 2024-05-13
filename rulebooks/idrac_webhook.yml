@@ -1,0 +1,44 @@
+---
+- name: Listen for events on a webhook
+  hosts: all
+  gather_facts: false
+  # execution_strategy: parallel
+  
+  ## Define our source for events
+  sources:
+    - dellemc.openmanage.idrac_event_webhook:
+        host: "{{ listener_host }}"
+        port: "{{ listener_port }}"
+        verify_certs: true
+        certfile: "/cert_files/cert.pem"
+        keyfile: "/cert_files/server.key"
+      
+      filters:
+        - ansible.eda.insert_hosts_to_meta:
+            host_path: "idrac_ip"      
+
+
+  ## Define the conditions we are looking for
+  rules:
+    - name: Power on
+      condition: 
+        all: 
+          - event.MessageId is search("SYS1001", ignorecase=true)
+
+  ## Define the action we should take should the condition be met
+      action:     
+        run_job_template: 
+          name: server_restart
+
+    - name: Temperature
+      condition: event.MessageId is search("AMP0300", ignorecase=true)
+
+      action:
+        run_job_template: 
+          name: gather_info
+
+
+
+
+
+#Run:  ansible-rulebook --rulebook webhook-example.yml -i inventory.yml --print-events
