@@ -7,8 +7,8 @@
   ## Define our source for events
   sources:
     - dellemc.openmanage.idrac_event_webhook:
-        host: "{{ listener_host }}"
-        port: "{{ listener_port }}"
+        host: 0.0.0.0
+        port: 5000
         verify_certs: true
         certfile: "/cert_files/cert.pem"
         keyfile: "/cert_files/server.key"
