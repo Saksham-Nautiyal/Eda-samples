@@ -5,7 +5,10 @@
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
-        port: 9090
+        port: 5000
+        verify_certs: true
+        certfile: "/cert_files/cert.pem"
+        keyfile: "/cert_files/server.key"
 
   ## Define the conditions we are looking for
   rules:
