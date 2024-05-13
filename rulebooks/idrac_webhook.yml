@@ -2,6 +2,7 @@
 - name: Listen for events on a webhook
   hosts: all
   gather_facts: false
+  execution_strategy: parallel
   
   sources:
     - dellemc.openmanage.idrac_event_webhook:
