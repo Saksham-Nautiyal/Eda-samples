@@ -14,8 +14,7 @@
   rules:
     - name: Job Id
       condition: event.payload.message == "List of job IDs"
-
-  ## Define the action we should take should the condition be met
       action:
         run_job_template: 
           name: gather_info
+          organization: Default
