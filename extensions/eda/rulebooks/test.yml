@@ -17,7 +17,7 @@
 
   ## Define the action we should take should the condition be met
       action:
-        run_playbook: 
-          name: Task3.yml
+        run_job_template: 
+          name: gather_info
 
 
