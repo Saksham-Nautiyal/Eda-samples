@@ -6,15 +6,8 @@
         host: 0.0.0.0
         port: 5000
   rules:
-    - name: Say Hello
-      condition: event.payload.message == "Hello"
-      action:
-        run_job_template:
-          name: Trigger from EDA
-          organization: Default
-
-    - name: Didn't hear Hello
-      condition: event.payload.message != "Hello"
+    - name: Job Id
+      condition: event.payload.message == "list of job"
       action:
         debug:
           msg: "You said, '{{ event.payload.message }}'. Is that what you meant to say?"
