@@ -6,7 +6,7 @@
   
   sources:
     - dellemc.openmanage.idrac_event_webhook:
-        host: 0.0.0.0
+        host: 100.96.37.52
         port: 5000
         verify_certs: true
         certfile: "/cert_files/cert.pem"
