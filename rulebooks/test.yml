@@ -1,20 +1,20 @@
 ---
 - name: Listen for events on a webhook
   hosts: all
-  ## Define our source for events
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
         port: 5000
-        # verify_certs: true
-        # certfile: "/cert_files/cert.pem"
-        # keyfile: "/cert_files/server.key"
-
-  ## Define the conditions we are looking for
   rules:
-    - name: Job Id
-      condition: event.payload.message == "List of job IDs"
+    - name: Say Hello
+      condition: event.payload.message == "Hello"
       action:
-        run_job_template: 
-          name: gather_info
+        run_job_template:
+          name: Trigger from EDA
           organization: Default
+
+    - name: Didn't hear Hello
+      condition: event.payload.message != "Hello"
+      action:
+        debug:
+          msg: "You said, '{{ event.payload.message }}'. Is that what you meant to say?"
