@@ -29,6 +29,7 @@
       action:     
         run_job_template: 
           name: server_restart
+          organization: Default
 
     - name: Temperature
       condition: event.MessageId is search("AMP0300", ignorecase=true)
@@ -36,6 +37,7 @@
       action:
         run_job_template: 
           name: gather_info
+          organization: Default
 
 
 
