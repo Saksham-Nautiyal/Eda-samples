@@ -13,7 +13,7 @@
 
       filters:
         - ansible.eda.insert_hosts_to_meta:
-            host_path: 'idrac_ip'
+            host_path: 'idrac_host'
 
   rules:
     - name: Power on the Server
