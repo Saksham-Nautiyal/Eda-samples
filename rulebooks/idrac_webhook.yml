@@ -19,13 +19,13 @@
     - name: Power on the Server
       condition: event.MessageId is search("RAC0704", ignorecase=true)
       action:
-        run_job_template:
-          name: "server_restart"
+        run_workflow_template:
+          name: "server_restart_workflow"
           organization: "Default"
 
     - name: Get the Temperature details
       condition: event.MessageId is search("AMP0300", ignorecase=true)
       action:
-        run_job_template:
-          name: "gather_info"
+        run_workflow_template:
+          name: "gather_info_workflow"
           organization: "Default"
