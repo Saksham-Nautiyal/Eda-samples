@@ -1,0 +1,19 @@
+- name: Create an incident in ServiceNow
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Create a ServiceNow incident
+      servicenow.itsm.incident:
+        state: new
+        # caller: some.user
+        short_description: new incident from ansible saksham
+        description: new incident
+        urgency: "2"
+        impact: "3"
+        
+      register: result
+
+    - name: Print the incident details
+      ansible.builtin.debug:
+        var: result
